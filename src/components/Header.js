@@ -1,13 +1,12 @@
 import styled from "styled-components"
-import planoIcon from '../assets/images/planoIcon.svg'
 import userIcon from '../assets/images/userIcon.svg'
 import React from "react"
 
-export default function Header() {
+export default function Header({pic}) {
     return(
         <>
             <Navibars>
-                <img src={planoIcon} alt="plano"/>
+                <img src={pic} alt="plano"/>
                 <img src={userIcon} alt="plano"/>
             </Navibars>
         </>
@@ -16,7 +15,7 @@ export default function Header() {
 
 const Navibars = styled.div`
     width: 100%;
-    background-color: crimson;
+    
     display: flex;
     align-items: flex-start;
     justify-content: space-between;

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { Navigate, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import returnIcon from "../../assets/images/returnIcon.svg";
 import { useEffect,useContext } from "react";
@@ -13,50 +13,62 @@ import MembershipForm from "./MembershipForm";
 
 
 export default function MembershipPage() {
-  const { membershipId } = useParams();
+  const { memberId } = useParams();
+  const navigate = useNavigate()
   const [membershipData, setMemberShipData] = useState({});
   const [perksm, setPerksm] = useState([]);
   const { userdata, setUserdata }  = useContext(UserContext);
 
   const token = userdata.token;
-  console.log("loou",membershipData)
+  console.log("loou", perksm)
+
+  
 
   useEffect(() => {
     axios
-      .get(`${BASE_URL}/subscriptions/memberships/${membershipId}`, {
+      .get(`${BASE_URL}/subscriptions/memberships/${memberId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((resp) => {
-        console.log(resp.data);
-        setMemberShipData(resp.data)
-        setPerksm(resp.data.perks)
+        console.log('teste get', resp);
+        setMemberShipData(resp.data);
+        setPerksm(resp.data.perks);
         
       })
       .catch((err) => console.log(err.response.data));
-  }, []);
+  }, [userdata]);
+
+  if (perksm.length == 0){
+    return(
+      <div>carregando...</div>
+    )
+  }
   return (
     <>
       <Container>
-        <ReturnIcon src={returnIcon} />
-        <img src={membershipData.image} atl='dr' />
-        <h1>Driven Plus</h1>
-        <PerksContainer>
-            <img src={Benefits} atl='b' />
-            <span>Benefícios:</span>
-            <Perks>
-                {perksm.map((value) => <h6>{`${value.id}. ${value.title}`}</h6>)}
-            </Perks>
-        </PerksContainer>
-        <PerksContainer>
-            <img src={DolarIcon} atl='b' />
-            <span>Preço:</span>
-            <Perks>
+
+            <ReturnIcon src={returnIcon} onClick={()=>navigate('/subscriptions')} />
+            <img src={membershipData.image} atl="dr" />
+            <h1>Driven Plus</h1>
+            <PerksContainer>
+              <img src={Benefits} atl="b" />
+              <span>Benefícios:</span>
+              <Perks>
+                {perksm.map((value, i) => (
+                  <h6 key={value.id}>{`${i+1}. ${value.title}`}</h6>
+                ))}
+              </Perks>
+            </PerksContainer>
+            <PerksContainer>
+              <img src={DolarIcon} atl="b" />
+              <span>Preço:</span>
+              <Perks>
                 <h6>{`R$${membershipData.price} cobrados mensalmente`}</h6>
-            </Perks>
-        </PerksContainer>
+              </Perks>
+            </PerksContainer>
 
-        <MembershipForm mId={perksm[0].membershipId}/>
-
+            <MembershipForm mId={perksm} />
+             
       </Container>
     </>
   );

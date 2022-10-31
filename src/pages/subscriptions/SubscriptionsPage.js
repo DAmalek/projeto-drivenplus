@@ -21,7 +21,7 @@ export default function SubscriptionsPage() {
       {headers: {Authorization: `Bearer ${token}`},
     })
       .then(resp => {
-        console.log(resp.data);
+        console.log('get subscription', resp.data);
         setSubscriptions(resp.data);
       })
       .catch(err => console.log(err.response.data))
@@ -32,7 +32,7 @@ export default function SubscriptionsPage() {
     <>
       <Container>
         {subscriptions.map((value) => (
-          <Link to={`/subscription/${value.id}`} key={value.id} >
+          <Link to={`/subscriptions/${value.id}`} key={value.id} >
             <PlanTemplate  pic={value.image} price={value.price} />
           </Link>
         ))}

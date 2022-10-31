@@ -5,7 +5,7 @@ import LoginPage from "./pages/login/LoginPage";
 import MembershipPage from "./pages/membership/MembershipPage";
 import SignPage from "./pages/signin/SignPage";
 import SubscriptionsPage from "./pages/subscriptions/SubscriptionsPage";
-
+import HomePage from "./pages/home/HomePage";
 
 function App() {
   return (
@@ -17,7 +17,8 @@ function App() {
             <Route path="/" element={<LoginPage />} />
             <Route path="/sign-up" element={<SignPage />} />
             <Route path="/subscriptions" element={<SubscriptionsPage />} />
-            <Route path="/subscription/:membershipId" element={<MembershipPage />} />
+            <Route path="/subscriptions/:memberId" element={<MembershipPage />} />
+            <Route path="/home" element={<HomePage />} />
           </Routes>
         </UserContextProvider>
       </BrowserRouter>

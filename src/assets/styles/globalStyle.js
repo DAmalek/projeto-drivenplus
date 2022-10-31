@@ -31,13 +31,9 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	
-	line-height: 1;
+	
 	background-color: #0E0E13;
 	color:white;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
 	font-family: 'Roboto', sans-serif;
 }
 

@@ -21,10 +21,17 @@ export default function LoginPage() {
     const body = form;
     const promise = axios.post(`${BASE_URL}/auth/login`, body);
     
+    
     promise.then((resp)=>{
-      console.log(resp.data);
+      console.log('usecontext' ,resp.data);
       setUserdata(resp.data);
-      navigate('/subscriptions');
+      localStorage.setItem('dados', JSON.stringify(resp.data))
+      
+      if(resp.data.membership !== null){
+        navigate('/home')
+      } else {
+        navigate('/subscriptions');
+      }
       
     })
     promise.catch((erro) => {
@@ -74,13 +81,14 @@ export default function LoginPage() {
 
 const Container = styled.div`
   width: 100%;
+  
   height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding-bottom: 100px;
-
+  
   img {
     margin-bottom: 130px;
   }
