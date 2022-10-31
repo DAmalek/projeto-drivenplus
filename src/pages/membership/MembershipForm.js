@@ -18,10 +18,10 @@ export default function MembershipForm({ mId }) {
   const [modalvisible, setModalvisible] = useState(false);
   const [buyerform, setBuyerForm] = useState({
     membershipId: mId[0].membershipId,
-    cardName: "fff",
-    cardNumber: "1111 2222 3333 4444",
-    securityNumber: 111,
-    expirationDate: "13/12",
+    cardName: "",
+    cardNumber: "",
+    securityNumber: '' ,
+    expirationDate: "",
   });
   console.log('local', mydata)
   console.log(modalvisible);

@@ -14,6 +14,7 @@ export default function LoginPage() {
     password: "",
   });
   const {userdata, setUserdata} = useContext(UserContext);
+  console.log('usecontext' ,userdata);
   
   function logRequest(event) {
     event.preventDefault()
@@ -23,9 +24,8 @@ export default function LoginPage() {
     
     
     promise.then((resp)=>{
-      console.log('usecontext' ,resp.data);
-      setUserdata(resp.data);
       localStorage.setItem('dados', JSON.stringify(resp.data))
+      setUserdata(JSON.parse(localStorage.getItem('dados')));
       
       if(resp.data.membership !== null){
         navigate('/home')
