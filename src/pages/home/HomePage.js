@@ -22,6 +22,7 @@ export default function HomePage() {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then(navigate("/subscriptions"));
+      
   }
 
   return (

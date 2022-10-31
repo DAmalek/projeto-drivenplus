@@ -35,7 +35,7 @@ export default function MembershipPage() {
         setPerksm(resp.data.perks);
         
       })
-      .catch((err) => console.log(err.response.data));
+      .catch((err) => alert(err.response.data.message));
   }, [userdata]);
 
   if (perksm.length == 0){
