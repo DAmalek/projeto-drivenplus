@@ -30,7 +30,7 @@ export default function HomePage() {
       <Container>
         <h1>Cole, {userdata.name}</h1>
         <div>
-          {userdata.membership.perks.map((value) => (
+          {localData.membership.perks.map((value) => (
             <a key={value.id} href={value.link} target="_blank">
               <Button>{value.title}</Button>
             </a>
